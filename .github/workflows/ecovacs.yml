@@ -17,7 +17,7 @@ on:
       # - "**.md"
   workflow_dispatch:
 jobs:
-  package-build:
+  source-pull:
     runs-on: ${{matrix.operating-system}}
     strategy:
       fail-fast: false
@@ -29,3 +29,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+  source-push:
+    needs: source-pull
+    permissions:
+      contents: write
+    uses: diepxuan-home-assistant/ecovacs/.github/workflows/ecovacs.yml@main
